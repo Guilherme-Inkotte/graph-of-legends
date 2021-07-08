@@ -1,6 +1,7 @@
+import Link from 'next/link';
+
 export const getStaticProps = async () => {
     const res = await fetch('http://ddragon.leagueoflegends.com/cdn/11.14.1/data/pt_BR/champion.json');
-    console.log(res)
     const data = await res.json();
 
     let championList = []
@@ -21,7 +22,7 @@ const ChampionsList = ({champions}) => {
         <h1>Lista de campeões</h1>
         {
             champions.map(champion => {
-                return <p style={{fontSize: '1.5rem'}}>{champion.name} - {champion.title}</p>
+                return <Link href={'/champions/' + champion.id} key={champion.id}><p style={{fontSize: '1.5rem'}}>{champion.name} - {champion.title}</p></Link>
             })
         }
     </main> );
